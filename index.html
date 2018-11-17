@@ -200,12 +200,13 @@
   }
 
   var getWizardX = function (width) {
-    return width / 2 - wizardWidth / 2;
+    var wizardCenterX = width / 2 - wizardWidth / 2;
+    return wizardCenterX;
   }
 
   var getWizardY = function (height) {
-    var wizzardCenterY = getWizardHeight() / 2;
-    return height / 3 - wizzardCenterY;
+    var wizardPositionY = height / 3 - getWizardHeight();
+    return wizardPositionY;
   }
 
 </script>
