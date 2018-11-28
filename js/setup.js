@@ -90,3 +90,4 @@ var similarMageAdd = function (mageCount) {
 similarMageAdd(mageMoc);
 
 similarListElement.appendChild(fragment);
+//1
