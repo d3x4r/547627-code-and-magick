@@ -46,14 +46,25 @@ var eyesColor = [
   'green',
 ];
 
+var fireBallColor = [
+  '#ee4830',
+  '#30a8ee',
+  '#5ce6c0',
+  '#e848d5',
+  '#e6e848'
+];
+
+var userName = document.querySelector('.setup-user-name');
+var closeEsc = function (evt) {
+  if (evt.keyCode === ESC_KEYCODE) {
+    getClose();
+  }
+};
+
 var getOpen = function () {
   form.classList.remove('hidden');
 
-  document.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === ESC_KEYCODE) {
-      getClose();
-    }
-  });
+  document.addEventListener('keydown', closeEsc);
 };
 
 var getClose = function () {
@@ -79,6 +90,11 @@ formClose.addEventListener('keydown', function (evt) {
     getClose();
   }
 });
+
+userName.addEventListener('focus', function () {
+  document.removeEventListener('keydown', closeEsc);
+});
+
 
 var getRandomMage = function () {
 
@@ -124,16 +140,41 @@ similarMageAdd(mageMoc);
 
 similarListElement.appendChild(fragment);
 
+// Генерация случайных целых чисел в диапазоне min-max
 var getRandomNumber = function (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
+// Получить один случайный элемент из массива
 var getRandomProperty = function (propertyArray) {
   return propertyArray[getRandomNumber(0, propertyArray.length - 1)];
 };
 
-var coat = document.querySelector('.wizard-coat');
+var wizardForm = document.querySelector('.setup-wizard-form');
+var coat = wizardForm.querySelector('.wizard-coat');
+var eyes = wizardForm.querySelector('.wizard-eyes');
+var fireBall = wizardForm.querySelector('.setup-fireball-wrap');
+var coatInput = wizardForm.querySelector('[name = "coat-color"]');
+var eyesInput = wizardForm.querySelector('[name = "eyes-color"]');
+var fireBallInput = wizardForm.querySelector('[name = "fireball-color"]');
+
+
+/* Устанавливаем значение свойства style в разметке на основе случайного элемента массива
+ и добавляем это значение в соответствующий input*/
+var addRandomAtribute = function (element, elementInput, atributeValue, atributeData) {
+  var property = getRandomProperty(atributeData);
+  element.setAttribute('style', atributeValue + property);
+  elementInput.value = property;
+};
 
 coat.addEventListener('click', function () {
-  coat.setAttribute('style', 'fill:' + getRandomProperty(coatColor));
+  addRandomAtribute(coat, coatInput, 'fill:', coatColor);
+});
+
+eyes.addEventListener('click', function () {
+  addRandomAtribute(eyes, eyesInput, 'fill:', eyesColor);
+});
+
+fireBall.addEventListener('click', function () {
+  addRandomAtribute(fireBall, fireBallInput, 'background:', fireBallColor);
 });
