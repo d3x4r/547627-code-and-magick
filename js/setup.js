@@ -69,6 +69,8 @@ var getOpen = function () {
 
 var getClose = function () {
   form.classList.add('hidden');
+  form.style.top = '';
+  form.style.left = '';
 };
 
 formOpen.addEventListener('click', function () {
@@ -178,3 +180,4 @@ eyes.addEventListener('click', function () {
 fireBall.addEventListener('click', function () {
   addRandomAtribute(fireBall, fireBallInput, 'background:', fireBallColor);
 });
+
